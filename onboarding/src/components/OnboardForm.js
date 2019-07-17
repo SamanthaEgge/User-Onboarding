@@ -46,15 +46,26 @@ export default withFormik({
       termsOfService: false
     };
   },
-  handleSubmit: (values, formikBag) => {},
+  handleSubmit: (values, formikBag) => {
+    formikBag.resetForm();
+    console.log('FORM SUCCESSFULLY SUBMITTED');
+    const url = 'https://reqres.in/api/users';
+    formikBag.setSubmitting(true);
+    axios.post(url, values).then((response) => {
+      console.log(response.data);
+      window.alert('Form submitted ' + response.data.name);
+      formikBag.setSubmitting(false);
+    });
+  },
   validationSchema: Yup.object().shape({
-      name: Yup.string()
-        .min(
-            limit: 3
-        )
-        .required(),
+    name: Yup.string()
+      .min(3)
+      .required('Name is required'),
     email: Yup.string()
-        .required('Name address is required.')
-        .email()
+      .required('Email address is required.')
+      .email(),
+    password: Yup.string()
+      .min(8)
+      .max(26)
   })
 })(OnboardForm);
