@@ -8,7 +8,6 @@ import './OnboardForm.css';
 function OnboardForm() {
   return (
     <div className="onboarding-container">
-      <h1>Form</h1>
       <Form className="onboard-form">
         <h2>Add Employee</h2>
         <Field
