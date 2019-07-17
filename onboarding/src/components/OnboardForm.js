@@ -48,13 +48,18 @@ export default withFormik({
   },
   handleSubmit: (values, formikBag) => {
     formikBag.resetForm();
-    console.log('FORM SUCCESSFULLY SUBMITTED');
+    console.log('we hit dat submission');
     const url = 'https://reqres.in/api/users';
-    formikBag.setSubmitting(true);
+    // formikBag.setSubmitting(true);
     axios.post(url, values).then((response) => {
       console.log(response.data);
-      window.alert('Form submitted ' + response.data.name);
-      formikBag.setSubmitting(false);
+      window.alert(
+        response.data.name +
+          'successfully submitted with' +
+          response.data.email +
+          'email'
+      );
+      // formikBag.setSubmitting(false);
     });
   },
   validationSchema: Yup.object().shape({
